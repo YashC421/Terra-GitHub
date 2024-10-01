@@ -10,7 +10,7 @@ resource "aws_vpc" "tera-vpc" {
 resource "aws_subnet" "public-subnet" {
   vpc_id            = aws_vpc.tera-vpc.id
   cidr_block        = "20.0.0.0/24"
-  availability_zone = "ap-south-1a"
+  availability_zone = "ap-southeast-1a"
 
   tags = {
     Name = "public-subnet"
@@ -20,7 +20,7 @@ resource "aws_subnet" "public-subnet" {
 resource "aws_subnet" "private-subnet" {
   vpc_id     = aws_vpc.tera-vpc.id
   cidr_block = "20.0.1.0/24"
-  availability_zone = "ap-south-1b"
+  availability_zone = "ap-southeast-1b"
 
   tags = {
     Name = "private-subnet"
