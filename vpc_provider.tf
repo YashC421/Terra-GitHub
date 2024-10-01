@@ -1,5 +1,5 @@
 resource "aws_vpc" "tera-vpc" {
-  cidr_block = "20.0.0.0/16"
+  cidr_block = "10.0.0.0/16"
 
   tags = {
     Name = "tera-vpc"
@@ -9,8 +9,8 @@ resource "aws_vpc" "tera-vpc" {
 
 resource "aws_subnet" "public-subnet" {
   vpc_id            = aws_vpc.tera-vpc.id
-  cidr_block        = "20.0.0.0/24"
-  availability_zone = "ap-southeast-1a"
+  cidr_block        = "10.0.0.0/24"
+  availability_zone = "us-east-1a"
 
   tags = {
     Name = "public-subnet"
@@ -19,8 +19,8 @@ resource "aws_subnet" "public-subnet" {
 
 resource "aws_subnet" "private-subnet" {
   vpc_id     = aws_vpc.tera-vpc.id
-  cidr_block = "20.0.1.0/24"
-  availability_zone = "ap-southeast-1b"
+  cidr_block = "10.0.1.0/24"
+  availability_zone = "us-east-1b"
 
   tags = {
     Name = "private-subnet"
@@ -118,10 +118,10 @@ resource "aws_security_group" "my-vpc-sg" {
 
 
 resource "aws_instance" "my-vpc-instance" {
-  ami               = "ami-0aa097a5c0d31430a"
+  ami               = "ami-0ebfd941bbafe70c6"
   instance_type     = "t2.micro"
   subnet_id         = aws_subnet.public-subnet.id
-  key_name          = "terraform-key"
+  key_name          = "terraform-key1"
   associate_public_ip_address = true
   security_groups   = [aws_security_group.my-vpc-sg.id]
 
@@ -131,10 +131,10 @@ resource "aws_instance" "my-vpc-instance" {
 }
 
 resource "aws_instance" "my-vpc-private-instance" {
-  ami               = "ami-0aa097a5c0d31430a"
+  ami               = "ami-0ebfd941bbafe70c6"
   instance_type     = "t2.micro"
   subnet_id         = aws_subnet.private-subnet.id
-  key_name          = "terraform-key"
+  key_name          = "terraform-key1"
   associate_public_ip_address = false
   security_groups   = [aws_security_group.my-vpc-sg.id]
 
