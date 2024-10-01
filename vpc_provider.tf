@@ -1,5 +1,5 @@
 resource "aws_vpc" "tera-vpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = "20.0.0.0/16"
 
   tags = {
     Name = "tera-vpc"
@@ -9,8 +9,8 @@ resource "aws_vpc" "tera-vpc" {
 
 resource "aws_subnet" "public-subnet" {
   vpc_id            = aws_vpc.tera-vpc.id
-  cidr_block        = "10.0.0.0/24"
-  availability_zone = "ap-southeast-1a"
+  cidr_block        = "20.0.0.0/24"
+  availability_zone = "ap-south-1a"
 
   tags = {
     Name = "public-subnet"
@@ -19,8 +19,8 @@ resource "aws_subnet" "public-subnet" {
 
 resource "aws_subnet" "private-subnet" {
   vpc_id     = aws_vpc.tera-vpc.id
-  cidr_block = "10.0.1.0/24"
-  availability_zone = "ap-southeast-1b"
+  cidr_block = "20.0.1.0/24"
+  availability_zone = "ap-south-1b"
 
   tags = {
     Name = "private-subnet"
@@ -28,7 +28,7 @@ resource "aws_subnet" "private-subnet" {
 }
 
 resource "aws_internet_gateway" "my-internet-gateway" {
-  vpc_id = "vpc-01b051b9a3aba6fa5"
+  vpc_id     = aws_vpc.tera-vpc.id
 
   tags = {
     Name = "my-igw"
